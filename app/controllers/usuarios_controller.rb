@@ -1,4 +1,5 @@
 class UsuariosController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
   before_action :set_usuario, only: %i[ show edit update destroy ]
 
   # GET /usuarios or /usuarios.json
@@ -28,8 +29,8 @@ class UsuariosController < ApplicationController
         format.html { redirect_to @usuario, notice: "Usuario was successfully created." }
         format.json { render :show, status: :created, location: @usuario }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @usuario.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +42,8 @@ class UsuariosController < ApplicationController
         format.html { redirect_to @usuario, notice: "Usuario was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @usuario }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @usuario.errors, status: :unprocessable_content }
       end
     end
   end
